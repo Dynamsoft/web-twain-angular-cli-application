@@ -34,3 +34,6 @@ os: win32 x64
     ```
 
 4. Open **http://localhost:4200/** in **Chrome**.
+
+## Blog
+[Using JavaScript Global Library in Angular CLI Application](http://www.codepool.biz/javascript-global-library-angular-cli.html)
