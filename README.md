@@ -27,6 +27,7 @@ os: win32 x64
     npm install -g @angular/cli
     npm install dwt
     npm install @types/dwt
+    npm install
     ```
 3. Run the app:
 
