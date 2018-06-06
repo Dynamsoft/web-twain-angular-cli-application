@@ -20,14 +20,13 @@ os: win32 x64
 ```
 
 ## How to Run
-1. Install [Node.js](https://nodejs.org/en/).
+1. Install [Node.js](https://nodejs.org/en/) if it's not installed yet.
 2. Install **Angular CLI** and dependencies:
 
     ```bash
     npm install -g @angular/cli
-    npm install dwt
+    npm install dwt@13.3.4
     npm install @types/dwt
-    npm install
     ```
 3. Run the app:
 

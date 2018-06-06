@@ -1,23 +1,29 @@
-/// <reference types="dwt" />
 
-import {Component} from '@angular/core';
+/// <reference types="dwt" />
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Using Dynamic Web TWAIN in Angular Project';
+  DWObject: WebTwain;
+  ngOnInit() {
+    Dynamsoft.WebTwainEnv.Load();
+    Dynamsoft.WebTwainEnv.RegisterEvent("OnWebTwainReady", () => { this.Dynamsoft_OnReady() });
+  }
 
+  Dynamsoft_OnReady(): void {
+    this.DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+  }
   acquireImage(): void {
-    const dwObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
-    const bSelected = dwObject.SelectSource();
-    if (bSelected) {
-      const onAcquireImageSuccess = () => { dwObject.CloseSource(); };
+    if (this.DWObject.SelectSource()) {
+      const onAcquireImageSuccess = () => { this.DWObject.CloseSource(); };
       const onAcquireImageFailure = onAcquireImageSuccess;
-      dwObject.OpenSource();
-      dwObject.AcquireImage({}, onAcquireImageSuccess, onAcquireImageFailure);
+      this.DWObject.OpenSource();
+      this.DWObject.AcquireImage({}, onAcquireImageSuccess, onAcquireImageFailure);
     }
   }
 }
