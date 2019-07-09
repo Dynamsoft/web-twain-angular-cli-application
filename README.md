@@ -3,20 +3,25 @@ The sample shows how to integrate **Dynamic Web TWAIN** JavaScript library into 
 
 ## How to Run
 1. Install [Node.js](https://nodejs.org/en/) if it's not installed yet.
-2. Install **Angular CLI** and dependencies:
+2. Install **Angular CLI** if it's not installed yet.
 
     ```bash
     npm install -g @angular/cli
-    npm install dwt@latest
-    npm install @types/dwt@latest
     ```
-3. Run the app:
+
+3. Install packages
+
+    ```bash
+    npm install
+    ```
+
+4. Run the app:
 
     ```bash
     ng serve --open
     ```
 
-4. Open **http://localhost:4200/** in **Chrome**.
+5. Open **http://localhost:4200/** in **Chrome**.
 
 ## Blog
 [Using JavaScript Global Library in Angular CLI Application](http://www.codepool.biz/javascript-global-library-angular-cli.html)
