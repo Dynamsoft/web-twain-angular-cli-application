@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   DWObject: WebTwain;
   ngOnInit() {
     Dynamsoft.WebTwainEnv.AutoLoad = false;
+    Dynamsoft.WebTwainEnv.Trial = true;
     Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
     Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '583px', Height: '513px' }];
     Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
