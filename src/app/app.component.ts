@@ -11,10 +11,19 @@ export class AppComponent implements OnInit {
   DWObject: WebTwain;
   ngOnInit() {
     Dynamsoft.WebTwainEnv.AutoLoad = false;
-    Dynamsoft.WebTwainEnv.Trial = true;
-    Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
     Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '583px', Height: '513px' }];
     Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
+    /**
+     * In order to use the full version, do the following
+     * 1. Change Dynamsoft.WebTwainEnv.Trial to false
+     * 2. Replace A-Valid-Product-Key with a full version key
+     * 3. Change Dynamsoft.WebTwainEnv.ResourcesPath to point to the full version 
+     *    resource files that you obtain after purchasing a key
+     */
+    Dynamsoft.WebTwainEnv.Trial = true;
+    Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
+    //Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.0";
+    
     Dynamsoft.WebTwainEnv.Load();
   }
 
