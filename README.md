@@ -30,7 +30,7 @@ The sample shows how to integrate Dynamic Web TWAIN JavaScript library into an A
 6. Open **http://localhost:4200/** in **Chrome**
 
 ## Blog
-Using JavaScript Global Library in Angular CLI Application
+[Using JavaScript Global Library in Angular CLI Application](https://www.codepool.biz/javascript-global-library-angular-cli.html)
 
 ------------------
 
