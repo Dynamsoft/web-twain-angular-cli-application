@@ -1,34 +1,42 @@
 # Dynamic Web TWAIN with Angular
-The sample shows how to integrate **Dynamic Web TWAIN** JavaScript library into an Angular project.
+The sample shows how to integrate Dynamic Web TWAIN JavaScript library into an Angular project.
 
 ## How to Run
-1. Install [Node.js](https://nodejs.org/en/) if it's not installed yet.
-2. Install **Angular CLI** if it's not installed yet.
+1. Install [Node.js](https://nodejs.org/en/) if it's not installed yet
+
+2. Install **Angular CLI** if it's not installed yet
 
     ```bash
     npm install -g @angular/cli
     ```
-
 3. Install packages
 
     ```bash
     npm install
     ```
 
-4. Run the app:
+4. Request a Dynamic Web TWAIN trial license [here](https://www.dynamsoft.com/CustomerPortal/Portal/TrialLicense.aspx) and update the license in the file `app.component.ts` on the follwing line (replace **A-Valid-Product-Key**)
+
+    ```typescript
+    Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
+    ```
+
+5. Run the app
 
     ```bash
     ng serve --open
     ```
 
-5. Open **http://localhost:4200/** in **Chrome**.
+6. Open **http://localhost:4200/** in **Chrome**
 
 ## Blog
-[Using JavaScript Global Library in Angular CLI Application](http://www.codepool.biz/javascript-global-library-angular-cli.html)
+Using JavaScript Global Library in Angular CLI Application
+
+------------------
 
 # AngularCliApplication
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
 
 ## Development server
 
