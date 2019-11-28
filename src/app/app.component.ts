@@ -9,6 +9,7 @@ import * as Dynamsoft from 'dwt';
 export class AppComponent implements OnInit {
   title = 'angular-cli-application';
   DWObject: WebTwain;
+  selectSources: HTMLSelectElement;
   ngOnInit() {
     Dynamsoft.WebTwainEnv.AutoLoad = false;
     Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '583px', Height: '513px' }];
@@ -21,22 +22,31 @@ export class AppComponent implements OnInit {
      *    resource files that you obtain after purchasing a key
      */
     Dynamsoft.WebTwainEnv.Trial = true;
-    Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
+    Dynamsoft.WebTwainEnv.ProductKey = "t0137TQMAADAciKinPg9PZkLSpq9fY5K31jCLLsz7c4Nfv7q8SIpB+weamGqJtH8I87bXX0Ft7YmhoitBD8ulP2Uw0ALfk+1Gz8w6xEtKwVT6MDEazboN43/Myp+9GPRZZrxRbrRgPDeS5lFEuxvyzB+jBeO5kTRPIfPxGRoWjBaMnxtrxtbMdoxyrA8=";
     //Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.0";
-    
+
     Dynamsoft.WebTwainEnv.Load();
   }
 
   Dynamsoft_OnReady(): void {
     this.DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    let count = this.DWObject.SourceCount;
+    this.selectSources = <HTMLSelectElement>document.getElementById("sources");
+
+    for (let i = 0; i < count; i++) {
+      this.selectSources.options.length = 0;
+      this.selectSources.options.add(new Option(this.DWObject.GetSourceNameItems(i), i.toString()));
+    }
   }
 
   acquireImage(): void {
-    if (this.DWObject.SelectSource()) {
+    if (this.DWObject.SourceCount > 0 && this.DWObject.SelectSourceByIndex(this.selectSources.selectedIndex)) {
       const onAcquireImageSuccess = () => { this.DWObject.CloseSource(); };
       const onAcquireImageFailure = onAcquireImageSuccess;
       this.DWObject.OpenSource();
       this.DWObject.AcquireImage({}, onAcquireImageSuccess, onAcquireImageFailure);
+    } else {
+      alert("No Source Available!");
     }
   }
 }
