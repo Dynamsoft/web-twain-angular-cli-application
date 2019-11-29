@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
      *    resource files that you obtain after purchasing a key
      */
     Dynamsoft.WebTwainEnv.Trial = true;
-    Dynamsoft.WebTwainEnv.ProductKey = "t0137TQMAADAciKinPg9PZkLSpq9fY5K31jCLLsz7c4Nfv7q8SIpB+weamGqJtH8I87bXX0Ft7YmhoitBD8ulP2Uw0ALfk+1Gz8w6xEtKwVT6MDEazboN43/Myp+9GPRZZrxRbrRgPDeS5lFEuxvyzB+jBeO5kTRPIfPxGRoWjBaMnxtrxtbMdoxyrA8=";
-    //Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.0";
+    Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
+    //Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.2";
 
     Dynamsoft.WebTwainEnv.Load();
   }
