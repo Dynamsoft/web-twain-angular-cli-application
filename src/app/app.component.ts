@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
      *    resource files that you obtain after purchasing a key
      */
     Dynamsoft.WebTwainEnv.Trial = true;
-    Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
+    Dynamsoft.WebTwainEnv.ProductKey = "t0138TQMAABo+FiBiLSeuawQO6hwa5rfo9HYbwuF6dgFdY7OnHgczZjnqKyrSixkQ22rok4bfKVV9ysKOHDCpcyDFbiEXkEWMPJlliF1SwmT6cGDEm9WGsRuz8N9e7PSZK04UG0kYiw2FeQTe7oo482UkYSw2FOZJZD4+XcMJIwljz0Zrm1updQOUq6ha";
     //Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.2";
 
     Dynamsoft.WebTwainEnv.Load();
@@ -32,9 +32,8 @@ export class AppComponent implements OnInit {
     this.DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
     let count = this.DWObject.SourceCount;
     this.selectSources = <HTMLSelectElement>document.getElementById("sources");
-
+    this.selectSources.options.length = 0;
     for (let i = 0; i < count; i++) {
-      this.selectSources.options.length = 0;
       this.selectSources.options.add(new Option(this.DWObject.GetSourceNameItems(i), i.toString()));
     }
   }
