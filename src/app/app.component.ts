@@ -26,8 +26,7 @@ export class AppComponent implements OnInit {
     /**
      * Get a free trial here https://www.dynamsoft.com/CustomerPortal/Portal/TrialLicense.aspx
      */
-    Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key"; 
-    Dynamsoft.WebTwainEnv.ProductKey = "t0140cQMAAIfiyxKERPj2woZMcNd5+XJhjXcA7Qq/Jq27X8rBqlZ4Lv6PkNQd4cP4fbrfSgZfx4xurFOWFJZBw1ObvvgPEUkMn8x+Ch3NhMnM0cDQe2s7jd2YXf/+pc6cVvFBsWHCWGwkzEN4f18RZ/4aJozFRsI8icxX0zWaMEwYi43g2VhtpVLKGzierxc=";
+    Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
     //Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.3.1";
     Dynamsoft.WebTwainEnv.Load();
   }
@@ -63,6 +62,11 @@ export class AppComponent implements OnInit {
      * Note, this following line of code uses the PDF Rasterizer which is an extra add-on that is licensed seperately
      */
     this.DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);
-    this.DWObject.LoadImageEx("", EnumDWT_ImageType.IT_ALL);
+    this.DWObject.LoadImageEx("", EnumDWT_ImageType.IT_ALL,
+      function () {
+        //success
+      }, function () {
+        //failure
+      });
   }
 }
