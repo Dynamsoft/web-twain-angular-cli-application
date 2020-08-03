@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as Dynamsoft from 'dwt';
+import Dynamsoft from 'dwt';
+import { WebTwain } from 'dwt/WebTwain';
 
 @Component({
   selector: 'app-dwt',
@@ -9,25 +10,23 @@ import * as Dynamsoft from 'dwt';
 export class DwtComponent implements OnInit {
   DWObject: WebTwain;
   selectSources: HTMLSelectElement;
-  ngOnInit() {
-    Dynamsoft.WebTwainEnv.AutoLoad = false;
-    Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '300px', Height: '400px' }];
+  containerId = 'dwtcontrolContainer';
+  bWASM = Dynamsoft.Lib.env.bMobile || Dynamsoft.WebTwainEnv.UseLocalService;
+  constructor() { }
+  ngOnInit(): void {
+    Dynamsoft.WebTwainEnv.Containers = [{ WebTwainId: 'dwtObject', ContainerId: this.containerId, Width: '300px', Height: '400px' }];
     Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
-    /**
-     * In order to use the full version, do the following
-     * 1. Change Dynamsoft.WebTwainEnv.Trial to false
-     * 2. Replace A-Valid-Product-Key with a full version key
-     * 3. Change Dynamsoft.WebTwainEnv.ResourcesPath to point to the full version 
-     *    resource files that you obtain after purchasing a key
-     */
-    Dynamsoft.WebTwainEnv.Trial = true;
-    /**
-     * Get a free trial here https://www.dynamsoft.com/CustomerPortal/Portal/TrialLicense.aspx
-     */
-    Dynamsoft.WebTwainEnv.ProductKey = 't0140cQMAAGnOvWTyoOR4HEFckJJmzMWpZcPSHyXGAvYGxgEkg5fBnRoFPslaAayuNOe5B/gp7plUCIUAtf6Ttb98d7Ifv/3A6Mxsu7CZLJhKHUuMorfuu/E/ZrOfuSyoMz7zjXKjgvHcMO1HiGbvyHv+GBWM54ZpP4Wej2RorGBUMJ4b4tx40yqnXlIiqvs='; //2020-04-24
-    //Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
-    //Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.3.1";
-    Dynamsoft.WebTwainEnv.Load();
+    Dynamsoft.WebTwainEnv.ProductKey = 't00911wAAADPPnD9pxlfiT5GAT4sDclSh9hcYKyXRoSMOd9P9daIUNgOgNu5+NoQnJYbYW07jDg3SoOt0+zoIKwH36ArwHubzB2M0fIB4gaNtZLgJaFQz0z0eAlwq4Q==';
+    Dynamsoft.WebTwainEnv.ResourcesPath = 'assets/dwt-resources';
+    let checkScript = () => {
+      if (Dynamsoft.Lib.detect.scriptLoaded) {
+        this.modulizeInstallJS();
+        Dynamsoft.WebTwainEnv.Load();
+      } else {
+        setTimeout(() => checkScript(), 100);
+      }
+    };
+    checkScript();
   }
 
   Dynamsoft_OnReady(): void {
@@ -60,12 +59,32 @@ export class DwtComponent implements OnInit {
     /**
      * Note, this following line of code uses the PDF Rasterizer which is an extra add-on that is licensed seperately
      */
-    this.DWObject.Addon.PDF.SetConvertMode(EnumDWT_ConvertMode.CM_RENDERALL);
-    this.DWObject.LoadImageEx("", EnumDWT_ImageType.IT_ALL,
+    this.DWObject.Addon.PDF.SetConvertMode(Dynamsoft.EnumDWT_ConvertMode.CM_RENDERALL);
+    this.DWObject.LoadImageEx("", Dynamsoft.EnumDWT_ImageType.IT_ALL,
       function () {
         //success
       }, function () {
         //failure
       });
+  }
+  modulizeInstallJS() {
+    let _DWT_Reconnect = (<any>window).DWT_Reconnect;
+    (<any>window).DWT_Reconnect = (...args) => _DWT_Reconnect.call({ Dynamsoft: Dynamsoft }, ...args);
+    let __show_install_dialog = (<any>window)._show_install_dialog;
+    (<any>window)._show_install_dialog = (...args) => __show_install_dialog.call({ Dynamsoft: Dynamsoft }, ...args);
+    let _OnWebTwainOldPluginNotAllowedCallback = (<any>window).OnWebTwainOldPluginNotAllowedCallback;
+    (<any>window).OnWebTwainOldPluginNotAllowedCallback = (...args) => _OnWebTwainOldPluginNotAllowedCallback.call({ Dynamsoft: Dynamsoft }, ...args);
+    let _OnWebTwainNeedUpgradeCallback = (<any>window).OnWebTwainNeedUpgradeCallback;
+    (<any>window).OnWebTwainNeedUpgradeCallback = (...args) => _OnWebTwainNeedUpgradeCallback.call({ Dynamsoft: Dynamsoft }, ...args);
+    let _OnWebTwainPreExecuteCallback = (<any>window).OnWebTwainPreExecuteCallback;
+    (<any>window).OnWebTwainPreExecuteCallback = (...args) => _OnWebTwainPreExecuteCallback.call({ Dynamsoft: Dynamsoft }, ...args);
+    let _OnWebTwainPostExecuteCallback = (<any>window).OnWebTwainPostExecuteCallback;
+    (<any>window).OnWebTwainPostExecuteCallback = (...args) => _OnWebTwainPostExecuteCallback.call({ Dynamsoft: Dynamsoft }, ...args);
+    let _OnRemoteWebTwainNotFoundCallback = (<any>window).OnRemoteWebTwainNotFoundCallback;
+    (<any>window).OnRemoteWebTwainNotFoundCallback = (...args) => _OnRemoteWebTwainNotFoundCallback.call({ Dynamsoft: Dynamsoft }, ...args);
+    let _OnRemoteWebTwainNeedUpgradeCallback = (<any>window).OnRemoteWebTwainNeedUpgradeCallback;
+    (<any>window).OnRemoteWebTwainNeedUpgradeCallback = (...args) => _OnRemoteWebTwainNeedUpgradeCallback.call({ Dynamsoft: Dynamsoft }, ...args);
+    let _OnWebTWAINDllDownloadFailure = (<any>window).OnWebTWAINDllDownloadFailure;
+    (<any>window).OnWebTWAINDllDownloadFailure = (...args) => _OnWebTWAINDllDownloadFailure.call({ Dynamsoft: Dynamsoft }, ...args);
   }
 }

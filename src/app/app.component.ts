@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebTwain } from 'dwt/WebTwain';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,6 @@ export class AppComponent implements OnInit {
   bShowDWT = false;
   bShowMore = false;
   ngOnInit() { }
-  initDWT() { this.bShowDWT = true; }
+  initDWT() { this.bShowDWT = true; } 
   showMore() { this.bShowMore = true; }
 }
