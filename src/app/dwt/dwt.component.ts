@@ -16,17 +16,9 @@ export class DwtComponent implements OnInit {
   ngOnInit(): void {
     Dynamsoft.WebTwainEnv.Containers = [{ WebTwainId: 'dwtObject', ContainerId: this.containerId, Width: '300px', Height: '400px' }];
     Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
-    Dynamsoft.WebTwainEnv.ProductKey = 't00911wAAADPPnD9pxlfiT5GAT4sDclSh9hcYKyXRoSMOd9P9daIUNgOgNu5+NoQnJYbYW07jDg3SoOt0+zoIKwH36ArwHubzB2M0fIB4gaNtZLgJaFQz0z0eAlwq4Q==';
+    Dynamsoft.WebTwainEnv.ProductKey = 't0103MQEAALyvxagocbKSRSxrTPT6WwNbLyDO0TkwmLhh9qgt7i83hCgiyplVqCkU5RqQlGZ3JZdI6oMCVamATX997VZBS2eBz8gy8pjqM41fffgnKycgDmva/SyVm/n0qaao5DQBJEk9Fw==';
     Dynamsoft.WebTwainEnv.ResourcesPath = 'assets/dwt-resources';
-    let checkScript = () => {
-      if (Dynamsoft.Lib.detect.scriptLoaded) {
-        this.modulizeInstallJS();
-        Dynamsoft.WebTwainEnv.Load();
-      } else {
-        setTimeout(() => checkScript(), 100);
-      }
-    };
-    checkScript();
+    Dynamsoft.WebTwainEnv.Load();
   }
 
   Dynamsoft_OnReady(): void {
@@ -66,25 +58,5 @@ export class DwtComponent implements OnInit {
       }, function () {
         //failure
       });
-  }
-  modulizeInstallJS() {
-    let _DWT_Reconnect = (<any>window).DWT_Reconnect;
-    (<any>window).DWT_Reconnect = (...args) => _DWT_Reconnect.call({ Dynamsoft: Dynamsoft }, ...args);
-    let __show_install_dialog = (<any>window)._show_install_dialog;
-    (<any>window)._show_install_dialog = (...args) => __show_install_dialog.call({ Dynamsoft: Dynamsoft }, ...args);
-    let _OnWebTwainOldPluginNotAllowedCallback = (<any>window).OnWebTwainOldPluginNotAllowedCallback;
-    (<any>window).OnWebTwainOldPluginNotAllowedCallback = (...args) => _OnWebTwainOldPluginNotAllowedCallback.call({ Dynamsoft: Dynamsoft }, ...args);
-    let _OnWebTwainNeedUpgradeCallback = (<any>window).OnWebTwainNeedUpgradeCallback;
-    (<any>window).OnWebTwainNeedUpgradeCallback = (...args) => _OnWebTwainNeedUpgradeCallback.call({ Dynamsoft: Dynamsoft }, ...args);
-    let _OnWebTwainPreExecuteCallback = (<any>window).OnWebTwainPreExecuteCallback;
-    (<any>window).OnWebTwainPreExecuteCallback = (...args) => _OnWebTwainPreExecuteCallback.call({ Dynamsoft: Dynamsoft }, ...args);
-    let _OnWebTwainPostExecuteCallback = (<any>window).OnWebTwainPostExecuteCallback;
-    (<any>window).OnWebTwainPostExecuteCallback = (...args) => _OnWebTwainPostExecuteCallback.call({ Dynamsoft: Dynamsoft }, ...args);
-    let _OnRemoteWebTwainNotFoundCallback = (<any>window).OnRemoteWebTwainNotFoundCallback;
-    (<any>window).OnRemoteWebTwainNotFoundCallback = (...args) => _OnRemoteWebTwainNotFoundCallback.call({ Dynamsoft: Dynamsoft }, ...args);
-    let _OnRemoteWebTwainNeedUpgradeCallback = (<any>window).OnRemoteWebTwainNeedUpgradeCallback;
-    (<any>window).OnRemoteWebTwainNeedUpgradeCallback = (...args) => _OnRemoteWebTwainNeedUpgradeCallback.call({ Dynamsoft: Dynamsoft }, ...args);
-    let _OnWebTWAINDllDownloadFailure = (<any>window).OnWebTWAINDllDownloadFailure;
-    (<any>window).OnWebTWAINDllDownloadFailure = (...args) => _OnWebTWAINDllDownloadFailure.call({ Dynamsoft: Dynamsoft }, ...args);
   }
 }
