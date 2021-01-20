@@ -1,6 +1,6 @@
 # AngularCliApplication
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
 ## Development server
 
@@ -25,3 +25,20 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## NOTES
+
+In this version, type definitions of the `dwt` package is included in the package itself and is no longer fetched separately. The changes in the sample are
+
+* In package.json,  `"@types/dwt": "16.1.1"` is removed from "dependencies"
+* When importing a type definition, the source is changed. For example, 
+
+  + The old way: 
+	```
+	import { WebTwain } from 'dwt/WebTwain'; 
+	```
+  + The new way:
+	```
+	import { WebTwain } from 'dwt/dist/types/WebTwain';
+	```
