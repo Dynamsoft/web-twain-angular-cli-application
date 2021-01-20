@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebTwain } from 'dwt/WebTwain';
+import { WebTwain } from 'dwt/dist/types/WebTwain';
 
 @Component({
   selector: 'app-root',
