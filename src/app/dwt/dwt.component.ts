@@ -11,18 +11,19 @@ export class DwtComponent implements OnInit {
   DWObject: WebTwain;
   selectSources: HTMLSelectElement;
   containerId = 'dwtcontrolContainer';
-  bWASM = Dynamsoft.Lib.env.bMobile || Dynamsoft.WebTwainEnv.UseLocalService;
+  bWASM = Dynamsoft.Lib.env.bMobile || !Dynamsoft.DWT.UseLocalService;
   constructor() { }
   ngOnInit(): void {
-    Dynamsoft.WebTwainEnv.Containers = [{ WebTwainId: 'dwtObject', ContainerId: this.containerId, Width: '300px', Height: '400px' }];
-    Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
-    Dynamsoft.WebTwainEnv.ProductKey = 't00921wAAAFYTYbgeiIdPK/NgJGUa+hoxpIV23O5q0c3iJmgz9SNsUIdL+FXtlfepBdbdSwiOHFSHPHA8y+SbtM5LGx2Bq+HeJUMV3kCdQNkBuiQoux/EPZaxC1UGK3k=';
-    Dynamsoft.WebTwainEnv.ResourcesPath = 'assets/dwt-resources';
-    Dynamsoft.WebTwainEnv.Load();
+	  Dynamsoft.DWT.CustomizableDisplayInfo = { buttons: {}, dialogText: {}};
+    Dynamsoft.DWT.Containers = [{ WebTwainId: 'dwtObject', ContainerId: this.containerId, Width: '300px', Height: '400px' }];
+    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
+    Dynamsoft.DWT.ProductKey = 't00881wAAAHA/txgTp/vaKgBUztynBN3DxSVf9ZSTJzA9UjKfc/e1/27DqH8/++u4qag2u3MS+GAYBb7bhR4O5XJqWQxEcZttiKx3zh2UAfwNmDwUM9kJ0ncsvA==';
+    Dynamsoft.DWT.ResourcesPath = 'assets/dwt-resources';
+    Dynamsoft.DWT.Load();
   }
 
   Dynamsoft_OnReady(): void {
-    this.DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+    this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     let count = this.DWObject.SourceCount;
     this.selectSources = <HTMLSelectElement>document.getElementById("sources");
     this.selectSources.options.length = 0;
@@ -33,7 +34,7 @@ export class DwtComponent implements OnInit {
 
   acquireImage(): void {
     if (!this.DWObject)
-      this.DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+      this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     if (this.DWObject.SourceCount > 0 && this.DWObject.SelectSourceByIndex(this.selectSources.selectedIndex)) {
       const onAcquireImageSuccess = () => { this.DWObject.CloseSource(); };
       const onAcquireImageFailure = onAcquireImageSuccess;
@@ -46,13 +47,13 @@ export class DwtComponent implements OnInit {
 
   openImage(): void {
     if (!this.DWObject)
-      this.DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+      this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     this.DWObject.IfShowFileDialog = true;
     /**
      * Note, this following line of code uses the PDF Rasterizer which is an extra add-on that is licensed seperately
      */
-    this.DWObject.Addon.PDF.SetConvertMode(Dynamsoft.EnumDWT_ConvertMode.CM_RENDERALL);
-    this.DWObject.LoadImageEx("", Dynamsoft.EnumDWT_ImageType.IT_ALL,
+    this.DWObject.Addon.PDF.SetConvertMode(Dynamsoft.DWT.EnumDWT_ConvertMode.CM_RENDERALL);
+    this.DWObject.LoadImageEx("", Dynamsoft.DWT.EnumDWT_ImageType.IT_ALL,
       function () {
         //success
       }, function () {

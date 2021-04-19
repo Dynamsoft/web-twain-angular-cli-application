@@ -31,7 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 In this version, type definitions of the `dwt` package is included in the package itself and is no longer fetched separately. The changes in the sample are
 
-* In package.json,  `"@types/dwt": "16.1.1"` is removed from "dependencies"
+* In package.json,  `"@types/dwt": "16.2"` is removed from "dependencies"
 * When importing a type definition, the source is changed. For example, 
 
   + The old way: 
