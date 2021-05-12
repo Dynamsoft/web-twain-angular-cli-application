@@ -11,19 +11,20 @@ export class DwtComponent implements OnInit {
   DWObject: WebTwain;
   selectSources: HTMLSelectElement;
   containerId = 'dwtcontrolContainer';
-  bWASM = Dynamsoft.Lib.env.bMobile || !Dynamsoft.DWT.UseLocalService;
+  bWASM = false;
   constructor() { }
   ngOnInit(): void {
 	  Dynamsoft.DWT.CustomizableDisplayInfo = { buttons: {}, dialogText: {}};
     Dynamsoft.DWT.Containers = [{ WebTwainId: 'dwtObject', ContainerId: this.containerId, Width: '300px', Height: '400px' }];
     Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
-    Dynamsoft.DWT.ProductKey = 't00891wAAAJyHArHjdRL0wBNHC47fVCY41/FatXNtYRsY6D/2tMOnqU3ecIoRTzEw1WNKa7lZJEgzA3fD39lzbscdtF5Wtxa/Cwnz3QLUgU8QaQCj65BTN2rtK7Q=';
+    Dynamsoft.DWT.ProductKey = 't00901wAAAFWG3iQa7V439k0DgGpmB6s4Rmz1VHLwubjWRQAlDUX/af1K0niJCExdUWQFZNehlPh9L86TLIUXzz+xH7JoS8HK3wbFereBMoAt4GkCEd9CVjTTIyyt';
     Dynamsoft.DWT.ResourcesPath = 'assets/dwt-resources';
     Dynamsoft.DWT.Load();
   }
 
   Dynamsoft_OnReady(): void {
     this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+	this.bWASM = Dynamsoft.Lib.env.bMobile || !Dynamsoft.DWT.UseLocalService;
     let count = this.DWObject.SourceCount;
     this.selectSources = <HTMLSelectElement>document.getElementById("sources");
     this.selectSources.options.length = 0;
