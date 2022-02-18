@@ -1,4 +1,4 @@
-# AngularCliApplication
+# Dynamic Web TWAIN Angular Cli Application
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
