@@ -12,37 +12,45 @@ export class DwtComponent implements OnInit {
   selectSources: HTMLSelectElement;
   containerId = 'dwtcontrolContainer';
   bWASM = false;
+  deviceList=[];
   constructor() { }
   ngOnInit(): void {
     Dynamsoft.DWT.Containers = [{ WebTwainId: 'dwtObject', ContainerId: this.containerId, Width: '300px', Height: '400px' }];
     Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
     Dynamsoft.DWT.ResourcesPath = '/assets/dwt-resources';
-	  Dynamsoft.DWT.ProductKey = 't0078lQAAAK/ZNBgqN1cFmBBaLYa3LiG4SDylHDPRco+UvWI+Tp4Rfekc6UVBU0VdL0bdydIHi2MiOAOUlKmLyJpEwlITGkUChWTejhsEwx9k';
+	  Dynamsoft.DWT.ProductKey = 't0079lQAAAL0w01yfdRJVQ3jO4IeF5GuEqSNibLHHPt302L8/8hqOnSPAj7P8nlNrDw8cOX1uoKWqbqyFK5Dak3bez8kZKl9+Qc8j3C0nRg0gwg==';
     Dynamsoft.DWT.Load();
   }
 
   Dynamsoft_OnReady(): void {
     this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
-	this.bWASM = Dynamsoft.Lib.env.bMobile || !Dynamsoft.DWT.UseLocalService;
-    let count = this.DWObject.SourceCount;
+    this.bWASM = Dynamsoft.Lib.env.bMobile || !Dynamsoft.DWT.UseLocalService;
     this.selectSources = <HTMLSelectElement>document.getElementById("sources");
-    this.selectSources.options.length = 0;
-    for (let i = 0; i < count; i++) {
-      this.selectSources.options.add(new Option(this.DWObject.GetSourceNameItems(i), i.toString()));
-    }
+		this.DWObject.GetDevicesAsync().then((devices)=>{
+      this.selectSources.options.length = 0;    
+      for (var i = 0; i < devices.length; i++) { // Get how many sources are installed in the system
+          this.selectSources.options.add(new Option(devices[i].displayName, i.toString())); // Add the sources in a drop-down list
+          this.deviceList.push(devices[i]);
+        }
+			}).catch(function (exp) {
+				alert(exp.message);
+      });
   }
 
   acquireImage(): void {
     if (!this.DWObject)
       this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
-    if (this.DWObject.SourceCount > 0 && this.DWObject.SelectSourceByIndex(this.selectSources.selectedIndex)) {
-      const onAcquireImageSuccess = () => { this.DWObject.CloseSource(); };
-      const onAcquireImageFailure = onAcquireImageSuccess;
-      this.DWObject.OpenSource();
-      this.DWObject.AcquireImage({}, onAcquireImageSuccess, onAcquireImageFailure);
-    } else {
-      alert("No Source Available!");
-    }
+      if(this.selectSources.options.length > 0) {
+        this.DWObject.SelectDeviceAsync(this.deviceList[this.selectSources.selectedIndex]).then(()=>{
+          return this.DWObject.AcquireImageAsync({});
+        }).then(()=>{
+          return this.DWObject.CloseSourceAsync();
+        }).catch((exp) =>{
+          alert(exp.message);
+        });
+      } else {
+        alert("No Source Available!");
+      }
   }
 
   openImage(): void {
