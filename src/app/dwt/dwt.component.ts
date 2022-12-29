@@ -26,15 +26,17 @@ export class DwtComponent implements OnInit {
     this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     this.bWASM = Dynamsoft.Lib.env.bMobile || !Dynamsoft.DWT.UseLocalService;
     this.selectSources = <HTMLSelectElement>document.getElementById("sources");
-		this.DWObject.GetDevicesAsync().then((devices)=>{
-      this.selectSources.options.length = 0;    
-      for (var i = 0; i < devices.length; i++) { // Get how many sources are installed in the system
-          this.selectSources.options.add(new Option(devices[i].displayName, i.toString())); // Add the sources in a drop-down list
-          this.deviceList.push(devices[i]);
-        }
-			}).catch(function (exp) {
-				alert(exp.message);
-      });
+    if(!Dynamsoft.Lib.env.bMobile){
+      this.DWObject.GetDevicesAsync().then((devices)=>{
+        this.selectSources.options.length = 0;    
+        for (var i = 0; i < devices.length; i++) { // Get how many sources are installed in the system
+            this.selectSources.options.add(new Option(devices[i].displayName, i.toString())); // Add the sources in a drop-down list
+            this.deviceList.push(devices[i]);
+          }
+        }).catch(function (exp) {
+          alert(exp.message);
+        });
+    }		
   }
 
   acquireImage(): void {
