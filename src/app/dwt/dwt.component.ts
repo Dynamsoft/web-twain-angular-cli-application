@@ -18,7 +18,7 @@ export class DwtComponent implements OnInit {
     Dynamsoft.DWT.Containers = [{ WebTwainId: 'dwtObject', ContainerId: this.containerId, Width: '300px', Height: '400px' }];
     Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
     Dynamsoft.DWT.ResourcesPath = '/assets/dwt-resources';
-	  Dynamsoft.DWT.ProductKey = 't00901wAAACy5sL0CithUvqG09Q3fX0qr6fVQmMBRMN6BlhLLXan8mKGeCb/c8Me5e+6GSuLobuK6zIq4SENjkxye/DjM4zDl74JezQ0KpoUBygqIJS2+M3cKFS1W';
+	  Dynamsoft.DWT.ProductKey = 't00931wAAACNSFQlO2azf9ZKZpEN8tgc8DKILlTk+M5qtCF2kqo6n2RlgktfmJYQp91wONeM6RnQxYET96X1wfwAvcPVnr6UCxQSnLA36vL7AsTUk8C8gLtqqOm6pICyv';
     Dynamsoft.DWT.Load();
   }
 
