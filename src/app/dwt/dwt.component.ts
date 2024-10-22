@@ -8,7 +8,7 @@ import { WebTwain } from 'dwt/dist/types/WebTwain';
   styleUrls: ['./dwt.component.css']
 })
 export class DwtComponent implements OnInit {
-  DWObject: WebTwain;
+  DWTObject: WebTwain;
   selectSources: HTMLSelectElement;
   containerId = 'dwtcontrolContainer';
   deviceList=[];
@@ -23,16 +23,16 @@ export class DwtComponent implements OnInit {
       });
    };
     Dynamsoft.DWT.Containers = [{ WebTwainId: 'dwtObject', ContainerId: this.containerId, Width: '300px', Height: '400px' }];
-    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', () => { this.Dynamsoft_OnReady(); });
+    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', () => { this.DWTObject_OnReady(); });
     Dynamsoft.DWT.ResourcesPath = '/assets/dwt-resources';
 	  Dynamsoft.DWT.ProductKey = "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9";
     Dynamsoft.DWT.Load();
   }
 
-  Dynamsoft_OnReady(): void {
-    this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+  DWTObject_OnReady(): void {
+    this.DWTObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     this.selectSources = <HTMLSelectElement>document.getElementById("sources");
-    this.DWObject.GetDevicesAsync().then((devices)=>{
+    this.DWTObject.GetDevicesAsync().then((devices)=>{
       this.selectSources.options.length = 0;    
       for (var i = 0; i < devices.length; i++) { // Get how many sources are installed in the system
           this.selectSources.options.add(new Option(devices[i].displayName, i.toString())); // Add the sources in a drop-down list
@@ -44,13 +44,13 @@ export class DwtComponent implements OnInit {
   }
 
   acquireImage(): void {
-    if (!this.DWObject)
-      this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+    if (!this.DWTObject)
+      this.DWTObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
       if(this.selectSources.options.length > 0) {
-        this.DWObject.SelectDeviceAsync(this.deviceList[this.selectSources.selectedIndex]).then(()=>{
-          return this.DWObject.AcquireImageAsync({});
+        this.DWTObject.SelectDeviceAsync(this.deviceList[this.selectSources.selectedIndex]).then(()=>{
+          return this.DWTObject.AcquireImageAsync({});
         }).then(()=>{
-          return this.DWObject.CloseSourceAsync();
+          return this.DWTObject.CloseSourceAsync();
         }).catch((exp) =>{
           alert(exp.message);
         });
@@ -60,16 +60,16 @@ export class DwtComponent implements OnInit {
   }
 
   openImage(): void {
-    if (!this.DWObject)
-      this.DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
-    this.DWObject.IfShowFileDialog = true;
+    if (!this.DWTObject)
+      this.DWTObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
+    this.DWTObject.IfShowFileDialog = true;
     /**
      * Note, this following line of code uses the PDF Rasterizer which is an extra add-on that is licensed seperately
      */
-    this.DWObject.Addon.PDF.SetReaderOptions({
+    this.DWTObject.Addon.PDF.SetReaderOptions({
       convertMode:Dynamsoft.DWT.EnumDWT_ConvertMode.CM_RENDERALL
     });
-    this.DWObject.LoadImageEx("", Dynamsoft.DWT.EnumDWT_ImageType.IT_ALL,
+    this.DWTObject.LoadImageEx("", Dynamsoft.DWT.EnumDWT_ImageType.IT_ALL,
       function () {
         //success
       }, function () {

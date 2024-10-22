@@ -9,7 +9,7 @@ import { WebTwain } from 'dwt/dist/types/WebTwain';
 
 export class AppComponent implements OnInit {
   title = 'Welcome to the brand-new world where scanners can be used seamlessly in your browsers!';
-  DWObject: WebTwain;
+  DWTObject: WebTwain;
   selectSources: HTMLSelectElement;
   bShowDWT = false;
   bShowMore = false;

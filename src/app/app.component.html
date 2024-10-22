@@ -350,9 +350,9 @@
 
     <!-- Terminal -->
     <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>this.DWObject.RemoveAllImages();</pre>
-      <pre *ngSwitchCase="'edit'">this.DWObject.RotateLeft(this.DWObject.CurrentImageIndexInBuffer);</pre>
-      <pre *ngSwitchCase="'upload'">this.DWObject.HTTPUpload(url, indices, enumImageType, dataFormat, 
+      <pre *ngSwitchDefault>this.DWTObject.RemoveAllImages();</pre>
+      <pre *ngSwitchCase="'edit'">this.DWTObject.RotateLeft(this.DWTObject.CurrentImageIndexInBuffer);</pre>
+      <pre *ngSwitchCase="'upload'">this.DWTObject.HTTPUpload(url, indices, enumImageType, dataFormat, 
       fileName, asyncSuccessFunc, asyncFailureFunc);</pre>
     </div>
   </div>
