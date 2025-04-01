@@ -3,7 +3,7 @@
 This project demonstrates how to build an Angular scanning project with [Dynamsoft Web TWAIN SDK](https://www.dynamsoft.com/web-twain/overview/).  
 
 ## Usage
-Environment: Node.js v18.16.0
+Environment: Node.js version - 22.14.0,  Angular version - v19.2.1
 1. Apply for a [30-day free trial license](https://www.dynamsoft.com/customer/license/trialLicense?product=dwt) of Dynamic Web TWAIN.
 
 2. Update the license key in `src\app\dwt\dwt.component.ts` file:
