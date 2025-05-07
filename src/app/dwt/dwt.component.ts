@@ -32,6 +32,17 @@ export class DwtComponent implements OnInit {
   DWTObject_OnReady(): void {
     this.DWTObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
     this.selectSources = <HTMLSelectElement>document.getElementById("sources");
+
+    // from v19.0
+    this.DWTObject.Addon.PDF.SetReaderOptions({
+      convertMode: Dynamsoft.DWT.EnumDWT_ConvertMode.CM_RENDERALL,
+      renderOptions: {
+          renderAnnotations: true,
+          resolution: 200
+      },
+      preserveUnmodifiedOnSave: true
+    });
+
     this.DWTObject.GetDevicesAsync().then((devices)=>{
       this.selectSources.options.length = 0;    
       for (var i = 0; i < devices.length; i++) { // Get how many sources are installed in the system
@@ -66,9 +77,6 @@ export class DwtComponent implements OnInit {
     /**
      * Note, this following line of code uses the PDF Rasterizer which is an extra add-on that is licensed seperately
      */
-    this.DWTObject.Addon.PDF.SetReaderOptions({
-      convertMode:Dynamsoft.DWT.EnumDWT_ConvertMode.CM_RENDERALL
-    });
     this.DWTObject.LoadImageEx("", Dynamsoft.DWT.EnumDWT_ImageType.IT_ALL,
       function () {
         //success
