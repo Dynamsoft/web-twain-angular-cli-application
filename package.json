@@ -17,21 +17,19 @@
     "@angular/forms": "19.2.2",
     "@angular/platform-browser": "19.2.2",
     "@angular/router": "19.2.2",
-	"@angular/localize": "19.2.2",
+    "@angular/localize": "19.2.2",
     "@angular/animations": "19.2.2",
-    "bootstrap": "^5.3.3",
-    "dwt": "19.2.0",
-    "ngx-bootstrap": "^19.0.2",
-    "rxjs": "~7.8.1",
-    "tslib": "^2.5.2"
+    "bootstrap": "5.3.3",
+    "dwt": "19.3.0",
+    "ngx-bootstrap": "19.0.2",
+    "rxjs": "7.8.1",
+    "tslib": "2.5.2"
   },
   "devDependencies": {
-    "@angular/cli": "19.2.2",
+    "@angular/cli": "19.2.3",
     "@angular/compiler-cli": "19.2.2",
-    "@types/node": "^22.13.10",
-    "codelyzer": "^6.0.2",
-    "protractor": "~7.0.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "@types/node": "22.13.10",
+    "ts-node": "10.9.2",
+    "typescript": "5.8.2"
   }
 }
