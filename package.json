@@ -1,5 +1,5 @@
 {
-  "name": "angular-cli-application",
+  "name": "web-twain-angular-cli-application",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
