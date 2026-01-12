@@ -8,7 +8,6 @@
   },
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@angular-devkit/build-angular": "19.2.18",
     "@angular/build": "19.2.18",
     "@angular/common": "19.2.18",
@@ -20,19 +19,6 @@
     "@angular/router": "19.2.18",
     "@angular/localize": "19.2.18",
     "@angular/animations": "19.2.18",
-=======
-    "@angular-devkit/build-angular": "19.2.3",
-    "@angular/build": "19.2.3",
-    "@angular/common": "19.2.2",
-    "@angular/compiler": "19.2.2",
-    "@angular/core": "19.2.18",
-    "@angular/elements": "19.2.2",
-    "@angular/forms": "19.2.2",
-    "@angular/platform-browser": "19.2.2",
-    "@angular/router": "19.2.2",
-    "@angular/localize": "19.2.2",
-    "@angular/animations": "19.2.2",
->>>>>>> a4d8b1765d1b9ef0409d57406e770e1ba45fbdf8
     "bootstrap": "5.3.3",
     "dwt": "19.3.0",
     "ngx-bootstrap": "19.0.2",
