@@ -1,5 +1,5 @@
 {
-  "name": "angular-cli-application",
+  "name": "web-twain-angular-cli-application",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -20,7 +20,7 @@
     "@angular/localize": "19.2.18",
     "@angular/animations": "19.2.18",
     "bootstrap": "5.3.3",
-    "dwt": "19.3.0",
+    "dwt": "19.3.1",
     "ngx-bootstrap": "19.0.2",
     "rxjs": "7.8.1",
     "tslib": "2.5.2"
