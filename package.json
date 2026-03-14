@@ -11,7 +11,7 @@
     "@angular-devkit/build-angular": "19.2.19",
     "@angular/build": "19.2.19",
     "@angular/common": "19.2.19",
-    "@angular/compiler": "19.2.19",
+    "@angular/compiler": "19.2.20",
     "@angular/core": "19.2.19",
     "@angular/elements": "19.2.19",
     "@angular/forms": "19.2.19",
