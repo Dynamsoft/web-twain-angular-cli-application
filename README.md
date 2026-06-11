@@ -21,7 +21,7 @@ Environment: Node.js version - 22.14.0,  Angular version - v19.2.1
 4. Run the Angular application as follows:
 
    ```
-   ng serve
+   npm run start
    ```
 
 
