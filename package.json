@@ -20,7 +20,7 @@
     "@angular/localize": "20.3.25",
     "@angular/animations": "20.3.25",
     "bootstrap": "5.3.3",
-    "dwt": "19.4.0",
+    "dwt": "19.4.2",
     "ngx-bootstrap": "20.0.2",
     "rxjs": "7.8.1",
     "tslib": "2.5.2",
