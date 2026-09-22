@@ -8,10 +8,10 @@ import { WebTwain } from 'dwt/dist/types/WebTwain';
   styleUrls: ['./dwt.component.css']
 })
 export class DwtComponent implements OnInit {
-  DWTObject: WebTwain;
-  selectSources: HTMLSelectElement;
+  DWTObject!: WebTwain;
+  selectSources!: HTMLSelectElement;
   containerId = 'dwtcontrolContainer';
-  deviceList=[];
+  deviceList: any[] = [];
   constructor() { }
   ngOnInit(): void {
     Dynamsoft.OnLicenseError = function (message, errorCode) {

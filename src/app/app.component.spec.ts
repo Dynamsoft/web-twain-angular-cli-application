@@ -1,14 +1,14 @@
-import { TestBed, async } from '@angular/core/testing';
+/// <reference types="jasmine" />
+
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
-      ],
-      declarations: [
+        RouterTestingModule,
         AppComponent
       ],
     }).compileComponents();
@@ -20,10 +20,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-cli-application'`, () => {
+  it('should have the expected title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-cli-application');
+    expect(app.title).toContain('scanners can be used seamlessly');
   });
 
   it('should render title', () => {

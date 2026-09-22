@@ -18,8 +18,8 @@ import { DwtComponent } from './dwt/dwt.component';
 })
 export class AppComponent implements OnInit {
   title = 'Welcome to the brand-new world where scanners can be used seamlessly in your browsers!';
-  DWTObject: WebTwain;
-  selectSources: HTMLSelectElement;
+  DWTObject!: WebTwain;
+  selectSources!: HTMLSelectElement;
   bShowDWT = false;
   bShowMore = false;
 

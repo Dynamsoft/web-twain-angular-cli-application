@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+/// <reference types="jasmine" />
+
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DwtComponent } from './dwt.component';
 
@@ -6,7 +8,7 @@ describe('DwtComponent', () => {
   let component: DwtComponent;
   let fixture: ComponentFixture<DwtComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DwtComponent ]
     })
